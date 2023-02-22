@@ -2,20 +2,35 @@ import java.util.Scanner;
 
 public class Player {
     private int damage;
+    private int orginalHealth;
     private int health;
     private int money;
     private String name;
     private String charName;
+    private Inventory inventory;
 
     private Scanner input = new Scanner(System.in);
     public Player(String name)
     {
+        this.inventory = new Inventory();
         this.name = name;
     }
 
+    public int getTotalDamage(){
+        return damage + this.getInventory().getWeapon().getDamage();
+    }
     public int getDamage()
     {
+
         return damage;
+    }
+
+    public int getOrginalHealth() {
+        return orginalHealth;
+    }
+
+    public void setOrginalHealth(int orginalHealth) {
+        this.orginalHealth = orginalHealth;
     }
 
     public void setDamage(int damage)
@@ -30,6 +45,10 @@ public class Player {
 
     public void setHealth(int health)
     {
+        if(health < 0)
+        {
+            health = 0;
+        }
         this.health = health;
     }
 
@@ -60,6 +79,16 @@ public class Player {
         this.charName = charName;
     }
 
+    public Inventory getInventory()
+    {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory)
+    {
+        this.inventory = inventory;
+    }
+
     public void selectChar()
     {
         Samurai samurai = new Samurai();
@@ -67,7 +96,9 @@ public class Player {
         Archer archer = new Archer();
 
         GameChar[] charList = {new Samurai(), new Archer(),new Knight() };
+
         System.out.println("Karakterler:");
+        System.out.println("--------------------------------------------");
         for(GameChar gameChar: charList)
         {
 
@@ -76,7 +107,7 @@ public class Player {
                     "\t\tPara:" +gameChar.getMoney());
         }
 
-        System.out.println("-------------------");
+        System.out.println("--------------------------------------------");
 
         int selectChar = input.nextInt();
         switch(selectChar){
@@ -101,7 +132,9 @@ public class Player {
 
 
     }
-    public void initPlayer(GameChar gameChar){
+    public void initPlayer(GameChar gameChar)
+    {
+        this.setOrginalHealth(gameChar.getHealth());
         this.setDamage(gameChar.getDamage());
         this.setHealth((gameChar.getHealth()));
         this.setMoney(gameChar.getMoney());
@@ -109,24 +142,15 @@ public class Player {
 
 
     }
-    public void selectLoc (){
-        Location location = null;
-        System.out.println("Bölgeler: ");
-        System.out.println("1 - Güvenli Ev");
-        System.out.println("2 - Mağaza");
-        System.out.println("Lütfen gitmek istediğiniz bölgeyi seçiniz : ");
-        int selecLoc = input.nextInt();
-        switch (selecLoc) {
-            case 1:
-                location = new SafeHouse(this);
-                break;
-            case 2:
-                location = new ToolStore(this);
-                break;
-            default:
-                location = new SafeHouse(this);
 
-        }
-        location.onLocation();
+    public void printInfo() {
+        System.out.println("Silah : " + this.getInventory().getWeapon().getName() +
+                ", Zırh : "+ this.getInventory().getArmor().getName() +
+                ", Bloklama : "+ this.getInventory().getArmor().getBlock() +
+                ", Hasar : "+ this.getTotalDamage() +
+                ", Sağlık : "+ this.getHealth() +
+                ", Para : "+this.getMoney());
     }
+
+
 }
