@@ -40,20 +40,26 @@ public class BattleLoc extends Location{
         return true;
     }
 
-    public boolean combat(int obsNumber){
+    public boolean combat(int obsNumber)
+    {
 
-        for(int i=0; i<obsNumber; i++){
+        for(int i=0; i<obsNumber; i++)
+        {
             this.getObstacle().setHealth(this.getObstacle().getOrginalHealth());
             playerStats();
             obstacleStats(i);
             while(this.getPlayer().getHealth() > 0 && this.getObstacle().getHealth() > 0){
                 System.out.print("<V>ur veya <K>aç :");
                 String selectCombat = input.nextLine().toUpperCase();
-                if(selectCombat.equals("V")){
+
+                if(selectCombat.equals("V"))
+                {
                     System.out.println("Siz vurdunuz !");
                     this.obstacle.setHealth(this.obstacle.getHealth() - this.getPlayer().getTotalDamage());
                     afterHit();
-                    if(this.getObstacle().getHealth() > 0 ){
+
+                    if(this.getObstacle().getHealth() > 0 )
+                    {
                         System.out.println();
                         System.out.println("Canavar size vurdu!");
                         int obstacleDamage = this.getObstacle().getDamage() - this.getPlayer().getInventory().getArmor().getBlock();
@@ -63,10 +69,11 @@ public class BattleLoc extends Location{
                         this.getPlayer().setHealth(this.getPlayer().getHealth() - obstacleDamage);
                         afterHit();
                     }
-                    else if(this.getObstacle().getHealth()<=0){
+                    else if(this.getObstacle().getHealth()<=0)
+                    {
                         System.out.println("Canavar geberdi!!!");
 
-                     }
+                    }
 
                 }
                 else
@@ -80,7 +87,8 @@ public class BattleLoc extends Location{
                 this.getPlayer().setMoney(this.getPlayer().getMoney() + this.getObstacle().getAward());
                 System.out.println("Güncel paranız : "+ this.getPlayer().getMoney());
             }
-            else{
+            else
+            {
                 System.out.println("Düşman, sizi YENDİ!!!");
                 return false;
             }
