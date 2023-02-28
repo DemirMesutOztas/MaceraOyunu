@@ -84,6 +84,7 @@ public class BattleLoc extends Location{
             if(this.getObstacle().getHealth() < this.getPlayer().getHealth()){
                 System.out.println("Düşmanı yendiniz !!!");
                 System.out.println(this.getObstacle().getAward() + " para kazandınız !");
+                this.getPlayer().getInventory().setZoneAward(this);
                 this.getPlayer().setMoney(this.getPlayer().getMoney() + this.getObstacle().getAward());
                 System.out.println("Güncel paranız : "+ this.getPlayer().getMoney());
             }
@@ -127,6 +128,11 @@ public class BattleLoc extends Location{
         Random r = new Random();
 
         return (r.nextInt(this.getMaxObstacle())+1);
+
+    }
+
+    public void selectAward (BattleLoc location)
+    {
 
     }
 
