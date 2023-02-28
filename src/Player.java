@@ -76,11 +76,14 @@ public class Player {
                 ", Bloklama : "+ this.getInventory().getArmor().getBlock() +
                 ", Hasar : "+ this.getTotalDamage() +
                 ", Sağlık : "+ this.getHealth() +
+                ", Özel Ödül : "+
                 ", Para : "+this.getMoney());
     }
     public int getTotalDamage(){
         return damage + this.getInventory().getWeapon().getDamage();
     }
+
+
     public int getDamage()
     {
         return damage;

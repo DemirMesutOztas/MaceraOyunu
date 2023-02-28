@@ -84,7 +84,9 @@ public class BattleLoc extends Location{
             if(this.getObstacle().getHealth() < this.getPlayer().getHealth()){
                 System.out.println("Düşmanı yendiniz !!!");
                 System.out.println(this.getObstacle().getAward() + " para kazandınız !");
-                this.getPlayer().getInventory().setZoneAward(this);
+                /*ZoneAward z = ZoneAward.getAwardName(this.getAward());
+                this.getPlayer().getInventory().setZoneAward(z);
+                System.out.println("Bölüm özel ödülünüz : "+ this.getPlayer().getInventory().getZoneAward().getName());*/
                 this.getPlayer().setMoney(this.getPlayer().getMoney() + this.getObstacle().getAward());
                 System.out.println("Güncel paranız : "+ this.getPlayer().getMoney());
             }
@@ -112,6 +114,7 @@ public class BattleLoc extends Location{
         System.out.println("Bloklama : "+ this.getPlayer().getInventory().getArmor().getBlock());
         System.out.println("Hasar : "+ this.getPlayer().getTotalDamage());
         System.out.println("Para : "+this.getPlayer().getMoney());
+        System.out.println("Özel ödüller : "+this.getPlayer().getInventory().getZoneAward().getName());
         System.out.println("*****");
 
 

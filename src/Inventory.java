@@ -31,9 +31,13 @@ public class Inventory {
 
     public ZoneAward getZoneAward() {
         return zoneAward;
+
     }
+
 
     public void setZoneAward(ZoneAward zoneAward) {
         this.zoneAward = zoneAward;
+
     }
+
 }

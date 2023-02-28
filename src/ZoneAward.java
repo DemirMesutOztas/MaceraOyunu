@@ -27,7 +27,7 @@ public class ZoneAward
 
     }
 
-    public static ZoneAward getWeaponObjByID(String name)
+    public static ZoneAward getAwardName(String name)
     {
         for (ZoneAward w : ZoneAward.awards()){
             if(w.getName() == name)
