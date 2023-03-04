@@ -7,16 +7,20 @@ public class BattleLoc extends Location{
     private Obstacle obstacle;
     private String award;
     private int maxObstacle;
+
+
     public BattleLoc(Player player, String name, Obstacle obstacle, String award, int maxObstacle)
     {
         super(player, name);
         this.award = award;
         this.obstacle = obstacle;
         this.maxObstacle = maxObstacle;
+
     }
 
     @Override
-    public boolean onLocation() {
+    public boolean onLocation()
+    {
         int obsNumber =this.randomObstancleNumber();
         System.out.println("Şuan buradasınız : "+this.getName());
 
@@ -28,6 +32,9 @@ public class BattleLoc extends Location{
         {
 
             System.out.println(this.getName() + " tüm düşmanları yendiniz !");
+            System.out.println("Bölge özel ödülü olan " + this.getAward() +" kazanmaya hak kazandınız");
+            this.getPlayer().getInventory().addAward(this.getAward());
+
             return true;
         }
 
@@ -42,7 +49,8 @@ public class BattleLoc extends Location{
 
     public boolean combat(int obsNumber)
     {
-
+        int luckNumber = this.luck();
+        System.out.println("şanslı numara :"+luckNumber);
         for(int i=0; i<obsNumber; i++)
         {
             this.getObstacle().setHealth(this.getObstacle().getOrginalHealth());
@@ -52,12 +60,35 @@ public class BattleLoc extends Location{
                 System.out.print("<V>ur veya <K>aç :");
                 String selectCombat = input.nextLine().toUpperCase();
 
-                if(selectCombat.equals("V"))
+                if(selectCombat.equals("V") && luckNumber==0)
                 {
-                    System.out.println("Siz vurdunuz !");
-                    this.obstacle.setHealth(this.obstacle.getHealth() - this.getPlayer().getTotalDamage());
-                    afterHit();
 
+
+                        System.out.println("Siz vurdunuz !");
+                        this.obstacle.setHealth(this.obstacle.getHealth() - this.getPlayer().getTotalDamage());
+                        afterHit();
+
+                        if(this.getObstacle().getHealth() > 0 )
+                        {
+                            System.out.println();
+                            System.out.println("Canavar size vurdu!");
+                            int obstacleDamage = this.getObstacle().getDamage() - this.getPlayer().getInventory().getArmor().getBlock();
+                            if(obstacleDamage < 0){
+                                obstacleDamage = 0;
+                            }
+                            this.getPlayer().setHealth(this.getPlayer().getHealth() - obstacleDamage);
+                            afterHit();
+                        }
+                        else if(this.getObstacle().getHealth()<=0)
+                        {
+                            System.out.println("Canavar geberdi!!!");
+
+                        }
+
+
+                }
+                else if(selectCombat.equals("V") && luckNumber==1)
+                {
                     if(this.getObstacle().getHealth() > 0 )
                     {
                         System.out.println();
@@ -74,7 +105,9 @@ public class BattleLoc extends Location{
                         System.out.println("Canavar geberdi!!!");
 
                     }
-
+                    System.out.println("Siz vurdunuz !");
+                    this.obstacle.setHealth(this.obstacle.getHealth() - this.getPlayer().getTotalDamage());
+                    afterHit();
                 }
                 else
                 {
@@ -84,11 +117,10 @@ public class BattleLoc extends Location{
             if(this.getObstacle().getHealth() < this.getPlayer().getHealth()){
                 System.out.println("Düşmanı yendiniz !!!");
                 System.out.println(this.getObstacle().getAward() + " para kazandınız !");
-                /*ZoneAward z = ZoneAward.getAwardName(this.getAward());
-                this.getPlayer().getInventory().setZoneAward(z);
-                System.out.println("Bölüm özel ödülünüz : "+ this.getPlayer().getInventory().getZoneAward().getName());*/
+
                 this.getPlayer().setMoney(this.getPlayer().getMoney() + this.getObstacle().getAward());
                 System.out.println("Güncel paranız : "+ this.getPlayer().getMoney());
+
             }
             else
             {
@@ -114,7 +146,7 @@ public class BattleLoc extends Location{
         System.out.println("Bloklama : "+ this.getPlayer().getInventory().getArmor().getBlock());
         System.out.println("Hasar : "+ this.getPlayer().getTotalDamage());
         System.out.println("Para : "+this.getPlayer().getMoney());
-        System.out.println("Özel ödüller : "+this.getPlayer().getInventory().getZoneAward().getName());
+
         System.out.println("*****");
 
 
@@ -134,10 +166,12 @@ public class BattleLoc extends Location{
 
     }
 
-    public void selectAward (BattleLoc location)
-    {
-
+    public int luck (){
+        Random s = new Random();
+        return (s.nextInt((2)));
     }
+
+
 
     public Obstacle getObstacle() {
         return obstacle;
@@ -162,4 +196,6 @@ public class BattleLoc extends Location{
     public void setMaxObstacle(int maxObstacle) {
         this.maxObstacle = maxObstacle;
     }
+
+
 }

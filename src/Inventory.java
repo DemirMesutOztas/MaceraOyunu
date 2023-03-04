@@ -1,19 +1,28 @@
-public class Inventory {
+public class Inventory
+{
     private Weapon weapon;
     private Armor armor;
 
-    private ZoneAward zoneAward;
+    private static String [] zoneAward;
+
+    private static int i = 0;
 
 
-
-    public Inventory() {
+    public Inventory()
+    {
         this.weapon = new Weapon("Yumruk", -1, 0, 0);
         this.armor = new Armor(-1, "Paçavra", 0, 0);
-        this.zoneAward = new ZoneAward("-");
+
+        this.zoneAward = new String[3];
+        for(int k = 0; k<zoneAward.length;k++)
+        {
+            zoneAward[k]="-";
+        }
     }
 
 
-    public Armor getArmor() {
+    public Armor getArmor()
+    {
         return armor;
     }
 
@@ -29,15 +38,31 @@ public class Inventory {
         this.weapon = weapon;
     }
 
-    public ZoneAward getZoneAward() {
-        return zoneAward;
+
+    public void addAward(String award){
+        zoneAward[i++]=award;
+
+
 
     }
 
-
-    public void setZoneAward(ZoneAward zoneAward) {
-        this.zoneAward = zoneAward;
-
+    public void printAward()
+    {
+        for(int j=0;j<i;j++){
+            System.out.print(zoneAward[j]+" ");
+        }
+        System.out.println("");
     }
 
+    public boolean searchAward(String s) {
+        for (String st : zoneAward) {
+            if (st.equals(s)) {
+                return true;
+
+            }
+
+        }
+        return false;
+
+    }
 }
