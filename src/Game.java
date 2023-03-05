@@ -29,6 +29,7 @@ public class Game
             System.out.println("3 - Mağara-> Ödül yemek");
             System.out.println("4 - Orman-> Ödül odun");
             System.out.println("5 - Nehir-> Ödül su");
+            System.out.println("6 - Maden-> Ödül süpriz");
 
             System.out.println("0 - Çıkış yap -> Oyunu sonlandır");
             System.out.println("--------------------------------------------");
@@ -84,6 +85,19 @@ public class Game
                     else
                     {
                         location = new River(player);
+
+                    }
+                    break;
+                case 6:
+                    if(player.getInventory().searchAward("Yılan")==true)
+                    {
+                        System.out.println("Bu bölümü tamamladınız!");
+                        System.out.println("Tekrar giriş yapamazsınız!");
+                        continue;
+                    }
+                    else
+                    {
+                        location = new Mine(player);
 
                     }
                     break;

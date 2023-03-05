@@ -13,6 +13,10 @@ public class Weapon
 
     }
 
+    public Weapon() {
+
+    }
+
     public static Weapon[] weapons()
     {
         Weapon[] weaponList = new Weapon[3];

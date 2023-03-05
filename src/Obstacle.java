@@ -16,6 +16,10 @@ public class Obstacle {
 
     }
 
+    public Obstacle() {
+
+    }
+
     public int getAward() {
         return award;
     }
