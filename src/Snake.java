@@ -41,29 +41,65 @@ public class Snake extends Obstacle {
         if(number<=15)
         { //silah
             selectNumber = randomAwardNumber();
-            if(selectNumber<=15)
-            {
-                this.weapon = Weapon.getWeaponObjByID(1);
-            }
-            else if (selectNumber>15 && selectNumber<=35)
+            if(selectNumber<=20)
             {
                 this.weapon = Weapon.getWeaponObjByID(2);
+                this.setWeapon(this.weapon);
+            }
+            else if (selectNumber>20 && selectNumber<=50)
+            {
+                this.weapon = Weapon.getWeaponObjByID(3);
+                this.setWeapon(this.weapon);
             }
             else
             {
-                this.weapon = Weapon.getWeaponObjByID(3);
+                this.weapon = Weapon.getWeaponObjByID(1);
+                this.setWeapon(this.weapon);
             }
         }
         else if (number>15 && number<=30)
         { //zırh
+            selectNumber = randomAwardNumber();
+            if(selectNumber<=20)
+            {
+                this.armor = Armor.getArmorObjByID(3);
+                this.setArmor(this.armor);
+            }
+            else if (selectNumber>20 && selectNumber<=50)
+            {
+                this.armor = Armor.getArmorObjByID(2);
+                this.setArmor(this.armor);
+            }
+            else
+            {
+                this.armor = Armor.getArmorObjByID(1);
+                this.setArmor(this.armor);
+            }
 
         }
         else if (number>30 && number<=55)
         { //para
+            selectNumber = randomAwardNumber();
+            if(selectNumber<=20)
+            {
+                this.money = 10;
+                this.setAward(this.money);
+            }
+            else if (selectNumber>20 && selectNumber<=50)
+            {
+                this.money = 5;
+                this.setAward(this.money);
+            }
+            else
+            {
+                this.money = 1;
+                this.setAward(this.money);
+            }
 
         }
         else
         { //hiçbirşey
+
 
         }
 

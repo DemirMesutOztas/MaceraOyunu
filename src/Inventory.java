@@ -13,7 +13,7 @@ public class Inventory
         this.weapon = new Weapon("Yumruk", -1, 0, 0);
         this.armor = new Armor(-1, "Paçavra", 0, 0);
 
-        this.zoneAward = new String[3];
+        this.zoneAward = new String[10];
         for(int k = 0; k<zoneAward.length;k++)
         {
             zoneAward[k]="-";

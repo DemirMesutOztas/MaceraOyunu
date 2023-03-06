@@ -89,7 +89,7 @@ public class Game
                     }
                     break;
                 case 6:
-                    if(player.getInventory().searchAward("Yılan")==true)
+                    if(player.getInventory().searchAward("Suprise")==true)
                     {
                         System.out.println("Bu bölümü tamamladınız!");
                         System.out.println("Tekrar giriş yapamazsınız!");

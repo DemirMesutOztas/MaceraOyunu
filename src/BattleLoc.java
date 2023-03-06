@@ -21,7 +21,16 @@ public class BattleLoc extends Location{
     @Override
     public boolean onLocation()
     {
-        int obsNumber =this.randomObstancleNumber();
+        int obsNumber;
+        if(!(this.getName().equals("Maden")))
+        {
+             obsNumber =this.randomObstancleNumber();
+        }
+        else{
+            obsNumber =  this.maxObstacle;
+        }
+
+
         System.out.println("Şuan buradasınız : "+this.getName());
 
         System.out.println("Dikkatli ol. Burada "+ obsNumber+ " tane " +this.getObstacle().getName() + " yaşıyor.");
@@ -114,12 +123,39 @@ public class BattleLoc extends Location{
                     return false;
                 }
             }
-            if(this.getObstacle().getHealth() < this.getPlayer().getHealth()){
-                System.out.println("Düşmanı yendiniz !!!");
-                System.out.println(this.getObstacle().getAward() + " para kazandınız !");
+            if(this.getObstacle().getHealth() < this.getPlayer().getHealth())
+            {
+                if(this.getName().equals("Maden"))
+                {
+                    System.out.println("Düşmanı yendiniz !!!");
+                    if(this.obstacle.getAward()>0)
+                    {
+                        System.out.println(this.getObstacle().getAward() + " para kazandınız !");
+                        this.getPlayer().setMoney(this.getPlayer().getMoney() + this.getObstacle().getAward());
+                    }
+                    else if(this.obstacle.getArmor()!=null)
+                    {
+                        System.out.println(this.getObstacle().getArmor().getName() + "  kazandınız !");
+                        this.getPlayer().getInventory().setArmor(this.getObstacle().getArmor());
 
-                this.getPlayer().setMoney(this.getPlayer().getMoney() + this.getObstacle().getAward());
-                System.out.println("Güncel paranız : "+ this.getPlayer().getMoney());
+                    } else if (this.obstacle.getWeapon()!=null)
+                    {
+                        System.out.println(this.getObstacle().getWeapon().getName() + "  kazandınız !");
+                        this.getPlayer().getInventory().setWeapon(this.getObstacle().getWeapon());
+                    }
+
+                    System.out.println("Güncel paranız : "+ this.getPlayer().getMoney());
+                }
+                else
+                {
+                    System.out.println("Düşmanı yendiniz !!!");
+                    System.out.println(this.getObstacle().getAward() + " para kazandınız !");
+
+                    this.getPlayer().setMoney(this.getPlayer().getMoney() + this.getObstacle().getAward());
+                    System.out.println("Güncel paranız : "+ this.getPlayer().getMoney());
+                }
+
+
 
             }
             else
@@ -156,7 +192,13 @@ public class BattleLoc extends Location{
         System.out.println("--------------------");
         System.out.println("Sağlık : "+ this.getObstacle().getHealth());
         System.out.println("Hasar : "+ this.getObstacle().getDamage());
-        System.out.println("Ödül : "+ this.getObstacle().getAward());
+        if(this.getObstacle().getAward()>0)
+        {
+            System.out.println("Ödül : "+ this.getObstacle().getAward());
+        }
+
+
+
         System.out.println("####");
     }
     public int randomObstancleNumber (){

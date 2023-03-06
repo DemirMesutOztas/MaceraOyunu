@@ -6,6 +6,10 @@ public class Obstacle {
     private int health;
     private int orginalHealth;
 
+    private Armor armor;
+
+    private Weapon weapon;
+
     public Obstacle(int id, String name,int damage, int health, int award) {
         this.id = id;
         this.damage = damage;
@@ -13,8 +17,12 @@ public class Obstacle {
         this.orginalHealth = health;
         this.name = name;
         this.award = award;
+        this.armor=null;
+        this.weapon = null;
 
     }
+
+
 
     public Obstacle() {
 
@@ -70,5 +78,21 @@ public class Obstacle {
            health = 0;
        }
         this.health = health;
+    }
+
+    public Armor getArmor() {
+        return armor;
+    }
+
+    public void setArmor(Armor armor) {
+        this.armor = armor;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
     }
 }
